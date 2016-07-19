@@ -28,7 +28,13 @@ setup(
     url="",
     keywords=["tinker", "api-client"],
     install_requires=REQUIRES,
-    packages=["tinker_partner_api","swagger_generated"],
+    packages=[
+        "tinker_partner_api",
+        "swagger_generated",
+        "swagger_generated.tinker_partner_api_wrapper",
+        "swagger_generated.tinker_partner_api_wrapper.apis",
+        "swagger_generated.tinker_partner_api_wrapper.models"
+    ],
     include_package_data=True,
     long_description="""\
         This is a handcrafted wrapper around the swagger generated code for the Tinker Partner API.
