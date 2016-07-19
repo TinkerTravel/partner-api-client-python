@@ -4,13 +4,18 @@ This is a *beta-*Python client for the Tinker Partner-API (`api.tinker.taxi`).
 
 Feel free to contact us at `api@tinker.travel` or file a github issue, or PR ;-)
 
-## Overview
+## Installation
 
-Install
+This works best with Python 3.2 and upwards. You can install directly from github:
 
 ```sh
 pip install git+git://github.com/TinkerTravel/partner-api-client-python
 ```
+
+It also supports Python 2.7 and later with an up to date pyOpenSSL.
+See `INSTALL.md` for further details.
+
+## Usage
 
 First create a client object you pass it your `appId` and `apiKey` tokens.
 
@@ -18,8 +23,8 @@ First create a client object you pass it your `appId` and `apiKey` tokens.
 from tinker_partner_api import TinkerPartnerAPI
 
 tinker = TinkerPartnerAPI(
-    app_id='b8f61abc9164ae96bc6f1bc4',
-    api_key='9ba26ef96f3e96fa23b0a6fe6f0e26f3ab6,
+    app_id='YOUR_APPLICATION_IDENTIFIER',
+    api_key='YOUR_API_KEY',
     # use the sandbox (this is the default, anyway)
     production=False
 )
@@ -36,78 +41,14 @@ Then you can call:
 
 See below for details.
 
-## Installation
-
-This works best with Python 3.2 and upwards. It also supports Python 2.7 and
-later with an up to date pyOpenSSL.
-
-### Installation (Python 3)
-
-You can install directly from Github via pip:
-
-```sh
-pip install git+https://github.com/TinkerTravel/tinker-partner-api-python.git
-```
-
-To use the bindings, import the package:
-
-```python
-import tinker_partner_api as tinker
-```
-
-You can also install the API client via [Setuptools](http://pypi.python.org/pypi/setuptools),
-by cloning and running:
-
-```sh
-python setup.py install
-```
-
-### Installation (Python 2.7)
-
-For Python 2.7+ you need to put some more effort, sorry.
-
-You need to install recent versions of
-
-- `ndg-httpsclient`, `pyopenssl` and `pyasn` ; using a recent version of `openssl`.
-
-On Mac you can install this using homebrew:
-
-```sh
-brew update
-brew install openssl
-```
-
-Then you use this library in your Python builds like so (see `brew info openssl`):
-
-```sh
-# install cryptography with newer openssl library
-LDFLAGS="-L/usr/local/opt/openssl/lib" pip install cryptography --no-use-wheel
-
-# install rest of dependencies
-pip install ndg-httpsclient pyopenssl
-```
-
-Phew! Now the example should be working.
-
 ## Getting Started
 
-First create a client object you pass it your `appId` and `apiKey` tokens.
-
-```python 
-from tinker_partner_api import TinkerPartnerAPI
-
-tinker = TinkerPartnerAPI(
-    app_id='b8f61abc9164ae96bc6f1bc4',
-    api_key='9ba26ef96f3e96fa23b0a6fe6f0e26f3ab6,
-    # use the sandbox (this is the default, anyway)
-    production=False
-)
-```
+So create the `tinker` API client instance, as above.
 
 You can now request a list of supported airports, like so:
  
 ```python
-airports = tinkerAPI.airports()
+airports = tinker.airports()
 print("Total airports", len(airports))
 # => Total airports 425
 ```
@@ -126,7 +67,7 @@ And lookup a customer address
 ```python
 
 # get a home address
-geo_completions = tinkerAPI.location(country='nl', city='amsterdam', street='nieuwezijds voorburgwal')
+geo_completions = tinker.location(country='nl', city='amsterdam', street='nieuwezijds voorburgwal')
 
 # pick the first, this is an example, your user should decide here
 customer_geoloc = geo_completions[0]
@@ -138,7 +79,7 @@ print(customer_geoloc)
 Great, lets get a quote in both directions. First "to the airport", notice the `airport_arrival_time` parameter.
 
 ```python
-quote_to = tinkerAPI.quote_to_airport(
+quote_to = tinker.quote_to_airport(
     passengers=1,
     checkin_luggage=0,
     customer_geoloc=my_street['geoloc'],
@@ -156,7 +97,7 @@ Times passed should be always *local to the location you are referring to*
 (due to general relativity and curved space-time and such.. just kidding).
 
 ```python
-quote_from = tinkerAPI.quote_from_airport(
+quote_from = tinker.quote_from_airport(
     passengers=1,
     checkin_luggage=0,
     airport_geoloc=schiphol['geoloc'],
@@ -183,7 +124,7 @@ print(quote_to, quote_from)
 Okay, now if you want to confirm this, first create the customer details.
 
 ```python
-customer = tinkerAPI.create_customer(
+customer = tinker.create_customer(
     email='customer@gmail.com',
     first_name='The',
     last_name='Customer',
@@ -209,7 +150,7 @@ leg2 = {
     "flightNumber": 'KL-2345'
 }
 
-booking = tinkerAPI.confirm_booking(
+booking = tinker.confirm_booking(
     customer_id=customer['customerId'],
     selected_price_quotes=[leg1, leg2]
 )
