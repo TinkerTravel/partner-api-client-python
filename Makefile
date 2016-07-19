@@ -17,7 +17,6 @@ generate_api:
 	rm -rf  ${DEST}
 	java -jar ${SWAGGER} generate -l python -c python.config.json -i partner-api-def.json -o ${DEST}
 	touch ${DEST}/__init__.py
-	cp ${DEST}/README.md SWAGGER_WRAPPER.md
 
 pip_reinstall:
 	pip uninstall tinker-partner-api==0.2.0 ; pip install .
