@@ -1,5 +1,5 @@
 SWAGGER="swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar"
-DEST="tinker_partner_api/swagger_generated"
+DEST="swagger_generated"
 
 # quick build
 all: generate_api

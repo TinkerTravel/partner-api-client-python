@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import sys
 if sys.version_info <= (3,2):
     from urllib3.contrib import pyopenssl
