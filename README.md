@@ -6,6 +6,12 @@ Feel free to contact us at `api@tinker.travel` or file a github issue, or PR ;-)
 
 ## Overview
 
+Install
+
+```sh
+pip install git+git://github.com/TinkerTravel/partner-api-client-python
+```
+
 First create a client object you pass it your `appId` and `apiKey` tokens.
 
 ```python
