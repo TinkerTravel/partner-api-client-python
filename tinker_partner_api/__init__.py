@@ -16,7 +16,7 @@ if False:
     logging.getLogger("urllib3").setLevel(logging.DEBUG)
     logging.getLogger("tinker_partner_api").setLevel(logging.DEBUG)
 
-class TinkerPartner():
+class TinkerPartnerAPI():
     def __init__(self, production=False, app_id=None, api_key=None):
         subdomain = production and 'api' or 'sandbox'
         self.baseUrl = 'https://{}.tinker.taxi/api'.format(subdomain)
