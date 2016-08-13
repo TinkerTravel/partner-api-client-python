@@ -13,7 +13,7 @@ pip install git+git://github.com/TinkerTravel/partner-api-client-python
 ```
 
 It also supports Python 2.7 and later with an up to date pyOpenSSL.
-See `INSTALL.md` for further details.
+See [`INSTALLATION.md`](INSTALLATION.md) for further details.
 
 ## Usage
 
