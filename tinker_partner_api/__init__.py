@@ -53,7 +53,7 @@ class TinkerPartnerAPI():
 
         return self.booking.partner_booking_request_from_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
-            passengers=passengers, checkin_luggage=checkin_luggage,
+            passengers='A' + str(passengers or 1) + 'B0C0', checkin_luggage=checkin_luggage,
             airport_geoloc=airport_geoloc, location_geoloc=customer_geoloc,
             location_number=customer_street_nr, plane_landing_time=plane_landing_time
         ).result
@@ -72,7 +72,7 @@ class TinkerPartnerAPI():
 
         return self.booking.partner_booking_request_to_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
-            passengers=passengers, checkin_luggage=checkin_luggage,
+            passengers='A' + str(passengers or 1) + 'B0C0', checkin_luggage=checkin_luggage,
             airport_geoloc=airport_geoloc, location_geoloc=customer_geoloc,
             location_number=customer_street_nr, airport_arrival_time=airport_arrival_time,
         ).result
