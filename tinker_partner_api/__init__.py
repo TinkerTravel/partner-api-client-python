@@ -51,11 +51,13 @@ class TinkerPartnerAPI():
         if not type(plane_landing_time) == datetime:
             raise ValueError('`plane_landing_time` argument must be a datetime object')
 
+        d = plane_landing_time.strftime('%Y%m%d-%H:%M:00')
+
         return self.booking.partner_booking_request_from_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
             passengers='A' + str(passengers or 1) + 'B0C0', checkin_luggage=checkin_luggage,
             airport_geoloc=airport_geoloc, location_geoloc=customer_geoloc,
-            location_number=customer_street_nr, plane_landing_time=plane_landing_time
+            location_number=customer_street_nr, plane_landing_time=d
         ).result
 
     def quote_to_airport(self,
@@ -66,15 +68,16 @@ class TinkerPartnerAPI():
                          airport_geoloc=None,
                          airport_arrival_time=None):
 
-        # TODO check timezone = CET
         if not type(airport_arrival_time) == datetime:
             raise ValueError('`airport_arrival_time` argument must be a datetime object')
+
+        d = airport_arrival_time.strftime('%Y%m%d-%H:%M:00')
 
         return self.booking.partner_booking_request_to_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
             passengers='A' + str(passengers or 1) + 'B0C0', checkin_luggage=checkin_luggage,
             airport_geoloc=airport_geoloc, location_geoloc=customer_geoloc,
-            location_number=customer_street_nr, airport_arrival_time=airport_arrival_time,
+            location_number=customer_street_nr, airport_arrival_time=d,
         ).result
 
     def create_customer(self,
