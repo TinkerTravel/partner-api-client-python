@@ -51,7 +51,7 @@ class TinkerPartnerAPI():
         if not type(plane_landing_time) == datetime:
             raise ValueError('`plane_landing_time` argument must be a datetime object')
 
-        d = plane_landing_time.strftime('%Y%m%d-%H:%M:00')
+        d = plane_landing_time.strftime('%Y-%m-%d %H:%M:00')
 
         return self.booking.partner_booking_request_from_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
@@ -71,7 +71,7 @@ class TinkerPartnerAPI():
         if not type(airport_arrival_time) == datetime:
             raise ValueError('`airport_arrival_time` argument must be a datetime object')
 
-        d = airport_arrival_time.strftime('%Y%m%d-%H:%M:00')
+        d = airport_arrival_time.strftime('%Y-%m-%d %H:%M:00')
 
         return self.booking.partner_booking_request_to_airport_booking(
             app_id=self.app_id, api_key=self.api_key,
