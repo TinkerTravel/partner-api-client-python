@@ -21,7 +21,7 @@ if False:
 class TinkerPartnerAPI():
     def __init__(self, production=False, baseUrl=False, app_id=None, api_key=None):
         subdomain = production and 'api' or 'sandbox'
-        self.baseUrl = baseUrl or 'https://{}.tinker.taxi/api'.format(subdomain)
+        self.baseUrl = baseUrl or 'https://{}.tinker.taxi'.format(subdomain)
         self.client = tinker.ApiClient(host=self.baseUrl)
         self.booking = tinker.PartnerBookingApi(api_client=self.client)
         self.contact = tinker.CustomerApi(api_client=self.client)
